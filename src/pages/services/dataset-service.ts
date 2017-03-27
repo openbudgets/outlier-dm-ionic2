@@ -11,8 +11,13 @@ export class DatasetService {
 
     }
 
-    getDatasets() {
+    listDatasets() {
         let url = AppSettings.API_ENDPOINT + '/files';
+        return this.http.get(url).map(res => res.json());
+    }
+
+    retrieveDataset(filename: string) {
+        let url = AppSettings.API_ENDPOINT + '/files/' + filename;
         return this.http.get(url).map(res => res.json());
     }
 }

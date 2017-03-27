@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ItemDetailsPage } from '../dataset-details/dataset-details';
-import { DatasetService } from './dataset-service';
+import { DatasetService } from '../services/dataset-service';
 
 @Component({
   selector: 'page-list',
@@ -22,7 +22,7 @@ export class DatasetListPage {
     };
 
     // turn on loading at this point
-    this.datasetService.getDatasets().subscribe(
+    this.datasetService.listDatasets().subscribe(
       response => {
         this.items = response.map(file => {
           return {

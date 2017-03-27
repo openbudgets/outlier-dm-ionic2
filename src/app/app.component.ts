@@ -5,7 +5,6 @@ import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { DatasetListPage } from '../pages/dataset-list/dataset-list';
 
 
@@ -16,8 +15,7 @@ import { DatasetListPage } from '../pages/dataset-list/dataset-list';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  // make HelloIonicPage the root (or first) page
-  rootPage: any = HelloIonicPage;
+  rootPage: any = DatasetListPage;
   pages: Array<{title: string, component: any}>;
 
   constructor(
@@ -30,7 +28,6 @@ export class MyApp {
 
     // set our app's pages
     this.pages = [
-      { title: 'Hello Ionic', component: HelloIonicPage },
       { title: 'Datasets List', component: DatasetListPage }
     ];
   }

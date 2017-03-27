@@ -2,16 +2,29 @@ import { Component } from '@angular/core';
 
 import { NavController, NavParams } from 'ionic-angular';
 
+import { DatasetService } from '../services/dataset-service'
+
 
 @Component({
   selector: 'page-item-details',
-  templateUrl: 'dataset-details.html'
+  templateUrl: 'dataset-details.html',
+  providers: [DatasetService]
 })
 export class ItemDetailsPage {
-  selectedItem: any;
+  dataset: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private datasetService: DatasetService) {
     // If we navigated to this page, we will have an item available as a nav param
-    this.selectedItem = navParams.get('item');
+    this.dataset = navParams.get('item');
+
+    datasetService.retrieveDataset(this.dataset.title).subscribe(
+      res => {
+        this.dataset.data = res;
+      },
+      error => {
+        console.log(error);
+      },
+      //() =>
+    );
   }
 }
