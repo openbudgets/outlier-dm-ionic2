@@ -18,8 +18,4 @@ export class DatasetService {
     let url = AppSettings.API_ENDPOINT + '/files/' + filename;
     return this.http.get(url).map(res => res.json());
   }
-
-  getCurrentDataset() { return this.currentDataset }
-
-  setCurrentDataset(data: any) { this.currentDataset = data; }
 }

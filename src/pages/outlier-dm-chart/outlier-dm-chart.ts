@@ -1,12 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 
+// include d3 as it comes from the standard d3 js file
 declare var d3: any;
 
 @Component({
   selector: 'outlier-dm-chart',
-  template: `
-    <div class="chart"></div>
-  `
+  template: `<div class="chart"></div>`
 })
 export class OutlierDMChart implements OnInit {
   @Input() data: any;

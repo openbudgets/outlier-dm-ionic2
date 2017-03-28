@@ -41,7 +41,6 @@ export class DatasetListPage {
   }
 
   itemTapped(event, item) {
-    console.log(item);
     this.datasetService.retrieveDataset(item.title).subscribe(
       res => {
         item.data = res;
