@@ -20,6 +20,7 @@ export class ItemDetailsPage {
     datasetService.retrieveDataset(this.dataset.title).subscribe(
       res => {
         this.dataset.data = res;
+
       },
       error => {
         console.log(error);
