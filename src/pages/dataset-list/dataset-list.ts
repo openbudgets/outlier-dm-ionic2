@@ -41,8 +41,17 @@ export class DatasetListPage {
   }
 
   itemTapped(event, item) {
-    this.navCtrl.push(ItemDetailsPage, {
-      item: item
-    });
+    console.log(item);
+    this.datasetService.retrieveDataset(item.title).subscribe(
+      res => {
+        item.data = res;
+        this.navCtrl.push(ItemDetailsPage, {
+          item: item
+        });
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

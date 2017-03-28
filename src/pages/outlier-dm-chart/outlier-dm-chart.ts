@@ -1,51 +1,31 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
-import * as d3 from 'd3-selection';
-import * as d3Scale from "d3-scale";
-import * as d3Shape from "d3-shape";
-import * as d3Array from "d3-array";
-import * as d3Axis from "d3-axis";
-
-var data;
+declare var d3: any;
 
 @Component({
   selector: 'outlier-dm-chart',
   template: `
-    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>-->
-    <div *ngIf="dataArrived()" class="chart"></div>
-    <!--<script src="http://localhost:5000/static/js/detail.js"></script>-->
+    <div class="chart"></div>
   `
 })
-export class OutlierDMChart {
-  svg: any;
-  height: number = 400 * 1.5;
-  width: number = 500 * 1.5;
-  margin: number = 100 * 2;
-  labelX: string = 'YEAR';
-  labelY: string = 'MONEY';
-
+export class OutlierDMChart implements OnInit {
   @Input() data: any;
 
   constructor() {}
 
-  dataArrived () {
-    let arrived = typeof this.data != 'undefined';
-    if (arrived) {
-      this.load();
-      // data = this.data;
-    }
-    return arrived;
-  }
-
-  load() {
-    let that = this;
-    this.svg = d3.select('.chart')
+  ngOnInit() {
+    let height: number = 400 * 1.5;
+    let width: number = 500 * 1.5;
+    let margin: number = 100 * 2;
+    let labelX: string = 'YEAR';
+    let labelY: string = 'MONEY';
+    let svg: any = d3.select('.chart')
       .append('svg')
       .attr('class', 'chart')
-      .attr("width", this.width + 2*this.margin)
-      .attr("height", this.height + 2*this.margin)
+      .attr("width", width + 2*margin)
+      .attr("height", height + 2*margin)
       .append("g")
-      .attr("transform", "translate(" + this.margin + "," + this.margin + ")");
+      .attr("transform", "translate(" + margin + "," + margin + ")");
 
     let x_data = this.data.map(function (d) { return d.x; });
     let years = x_data.filter(function(item, pos) {
@@ -55,27 +35,27 @@ export class OutlierDMChart {
     let range_array = new Array(years.length);
     range_array[0] = 0;
     for (let i=1; i<range_array.length; i++) {
-      range_array[i] = range_array[i-1] + this.width / (years.length - 1);
+      range_array[i] = range_array[i-1] + width / (years.length - 1);
     }
 
-    let x = d3Scale.scaleOrdinal()
+    let x = d3.scale.ordinal()
       .domain(years)
       .range(range_array);
 
-    let y = d3Scale.scaleLinear()
-      .domain([d3Array.min(this.data, function (d) { return d.y; }), d3Array.max(this.data, function (d) { return d.y; })])
-      .range([this.height, 0]);
+    let y = d3.scale.linear()
+      .domain([d3.min(this.data, function (d) { return d.y; }), d3.max(this.data, function (d) { return d.y; })])
+      .range([height, 0]);
 
-    let scale = d3Scale.scaleLinear()
-      .domain([d3Array.min(this.data, function (d) { return d.size; }), d3Array.max(this.data, function (d) { return d.size; })])
+    let scale = d3.scale.sqrt()
+      .domain([d3.min(this.data, function (d) { return d.size; }), d3.max(this.data, function (d) { return d.size; })])
       .range([1, 40]);
 
-    let opacity = d3Scale.scaleLinear()
-      .domain([d3Array.min(this.data, function (d) { return d.size; }), d3Array.max(this.data, function (d) { return d.size; })])
+    let opacity = d3.scale.sqrt()
+      .domain([d3.min(this.data, function (d) { return d.size; }), d3.max(this.data, function (d) { return d.size; })])
       .range([1, .5]);
 
-    let xAxis = d3Axis.axisBottom().scale(x);
-    let yAxis = d3Axis.axisLeft().scale(y);//.orient("left");
+    let xAxis = d3.svg.axis().scale(x);
+    let yAxis = d3.svg.axis().scale(y).orient("left");
 
     // Define the div for the tooltip
     let div = d3.select("body").append("div")
@@ -83,61 +63,58 @@ export class OutlierDMChart {
       .style("opacity", 0);
 
     // y axis and label
-    this.svg.append("g")
+    svg.append("g")
       .attr("class", "y axis")
       .call(yAxis)
       .append("text")
       .attr("x", 0)
-      .attr("y", -this.margin + 120)
+      .attr("y", -margin + 120)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
       .style("font-weight", "bold")
-      .text(this.labelY);
+      .text(labelY);
 
     // x axis and label
-    this.svg.append("g")
+    svg.append("g")
       .attr("class", "x axis")
-      .attr("transform", "translate(0," + this.height + ")")
+      .attr("transform", "translate(0," + height + ")")
       .call(xAxis)
       .append("text")
-      .attr("x", this.width + 70)
-      .attr("y", this.margin - 130)
+      .attr("x", width + 70)
+      .attr("y", margin - 130)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
       .style("font-weight", "bold")
-      .text(this.labelX);
+      .text(labelX);
 
+    let color = d3.scale.category10();
     let colors = {};
-    let i = 0;
     this.data.forEach(function(d) {
-      colors[d.color] = d3Scale.schemeCategory10[i++];
+      colors[d.color] = color(d.color);
     });
 
-    i = 0;
+    let i = 0;
     for (let key in colors) {
       if (!colors.hasOwnProperty(key)) continue;
       i++;
-      this.svg.append("text")
+      svg.append("text")
         .style("fill", colors[key])
         .style("font-weight", "bold")
         .style("font-size", "20px")
-        .attr("x", this.width + 50)
+        .attr("x", width + 50)
         .attr("y", -50 + 20*i)
         .text(key);
     }
 
-    this.svg.selectAll("circle")
+    svg.selectAll("circle")
       .data(this.data)
       .enter()
       .insert("circle")
-      .attr("cx", this.width / 2)
-      .attr("cy", this.height / 2)
+      .attr("cx", width / 2)
+      .attr("cy", height / 2)
       .attr("opacity", function (d) { return opacity(d.size); })
       .attr("r", function (d) { return scale(d.size); })
-      .style("fill", function (d) {return colors[d.color];})
-      .transition()
-      .attr("cx", function (d) { return x(d.x); })
-      .attr("cy", function (d) { return y(d.y); })
+      .style("fill", function (d) {return color(d.color);})
       .on("click", function(d, i) {
         div.transition()
           .duration(200)
@@ -147,25 +124,28 @@ export class OutlierDMChart {
           .style("top", (d3.event.pageY - 28) + "px");
       })
       .on('mouseover', function (d, i) {
-        that.fade(d.color, .1);
+        fade(d.color, .1);
       })
       .on('mouseout', function (d, i) {
-        that.fadeOut(opacity);
-      });
-  }
-
-  fade(color, opacity) {
-    this.svg.selectAll("circle")
-      .filter(function (d) {
-        return d.color != color;
+        fadeOut();
       })
-      // .transition()
-      .style("opacity", opacity);
-  }
+      .transition()
+      .attr("cx", function (d) { return x(d.x); })
+      .attr("cy", function (d) { return y(d.y); });
 
-  fadeOut(opacity) {
-    this.svg.selectAll("circle")
-      // .transition()
-      .style("opacity", function (d) { opacity(d.size); });
+    function fade(color, opacity) {
+      svg.selectAll("circle")
+        .filter(function (d) {
+          return d.color != color;
+        })
+        .transition()
+        .style("opacity", opacity);
+    }
+
+    function fadeOut() {
+      svg.selectAll("circle")
+        .transition()
+        .style("opacity", function (d) { opacity(d.size); });
+    }
   }
 }

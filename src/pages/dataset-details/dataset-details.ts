@@ -16,16 +16,5 @@ export class ItemDetailsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private datasetService: DatasetService) {
     // If we navigated to this page, we will have an item available as a nav param
     this.dataset = navParams.get('item');
-
-    datasetService.retrieveDataset(this.dataset.title).subscribe(
-      res => {
-        this.dataset.data = res;
-
-      },
-      error => {
-        console.log(error);
-      },
-      //() =>
-    );
   }
 }
