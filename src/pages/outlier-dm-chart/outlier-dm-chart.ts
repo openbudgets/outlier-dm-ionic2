@@ -43,15 +43,24 @@ export class OutlierDMChart implements OnInit {
       .range(range_array);
 
     let y = d3.scale.linear()
-      .domain([d3.min(this.data, function (d) { return d.y; }), d3.max(this.data, function (d) { return d.y; })])
+      .domain([
+        d3.min(this.data, function (d) { return d.y; }),
+        d3.max(this.data, function (d) { return d.y; })
+      ])
       .range([height, 0]);
 
     let scale = d3.scale.sqrt()
-      .domain([d3.min(this.data, function (d) { return d.size; }), d3.max(this.data, function (d) { return d.size; })])
+      .domain([
+        d3.min(this.data, function (d) { return d.size; }),
+        d3.max(this.data, function (d) { return d.size; })
+      ])
       .range([1, 40]);
 
     let opacity = d3.scale.sqrt()
-      .domain([d3.min(this.data, function (d) { return d.size; }), d3.max(this.data, function (d) { return d.size; })])
+      .domain([
+        d3.min(this.data, function (d) { return d.size; }),
+        d3.max(this.data, function (d) { return d.size; })
+      ])
       .range([1, .5]);
 
     let xAxis = d3.svg.axis().scale(x);
@@ -119,7 +128,8 @@ export class OutlierDMChart implements OnInit {
         div.transition()
           .duration(200)
           .style("opacity", .9);
-        div.html("<b><p>Year: " + d.x + "</p><p>Money: " + d.y + "</p><p>Budget Phase: " + d.color + "</p><p>Outlier Score: " + d.size + "</b>")
+        div.html("<b><p>Year: " + d.x + "</p><p>Money: " + d.y + "</p><p>Budget Phase: " + d.color +
+                 "</p><p>Outlier Score: " + d.size + "</b>")
           .style("left", (d3.event.pageX) + "px")
           .style("top", (d3.event.pageY - 28) + "px");
       })
