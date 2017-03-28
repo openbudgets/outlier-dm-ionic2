@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import * as d3 from 'd3-selection';
 import * as d3Scale from "d3-scale";
@@ -6,9 +6,15 @@ import * as d3Shape from "d3-shape";
 import * as d3Array from "d3-array";
 import * as d3Axis from "d3-axis";
 
+var data;
+
 @Component({
   selector: 'outlier-dm-chart',
-  template: `<div *ngIf="dataArrived()" class="chart"></div>`
+  template: `
+    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>-->
+    <div *ngIf="dataArrived()" class="chart"></div>
+    <!--<script src="http://localhost:5000/static/js/detail.js"></script>-->
+  `
 })
 export class OutlierDMChart {
   svg: any;
@@ -26,11 +32,13 @@ export class OutlierDMChart {
     let arrived = typeof this.data != 'undefined';
     if (arrived) {
       this.load();
+      // data = this.data;
     }
     return arrived;
   }
 
   load() {
+    let that = this;
     this.svg = d3.select('.chart')
       .append('svg')
       .attr('class', 'chart')
@@ -58,11 +66,11 @@ export class OutlierDMChart {
       .domain([d3Array.min(this.data, function (d) { return d.y; }), d3Array.max(this.data, function (d) { return d.y; })])
       .range([this.height, 0]);
 
-    let scale = d3Scale.scaleSqrt()
+    let scale = d3Scale.scaleLinear()
       .domain([d3Array.min(this.data, function (d) { return d.size; }), d3Array.max(this.data, function (d) { return d.size; })])
       .range([1, 40]);
 
-    let opacity = d3Scale.scaleSqrt()
+    let opacity = d3Scale.scaleLinear()
       .domain([d3Array.min(this.data, function (d) { return d.size; }), d3Array.max(this.data, function (d) { return d.size; })])
       .range([1, .5]);
 
@@ -102,7 +110,6 @@ export class OutlierDMChart {
     let colors = {};
     let i = 0;
     this.data.forEach(function(d) {
-      console.log(d3Scale.schemeCategory10);
       colors[d.color] = d3Scale.schemeCategory10[i++];
     });
 
@@ -127,7 +134,10 @@ export class OutlierDMChart {
       .attr("cy", this.height / 2)
       .attr("opacity", function (d) { return opacity(d.size); })
       .attr("r", function (d) { return scale(d.size); })
-      .style("fill", function (d) { return d3Scale.schemeCategory10(d.color); })
+      .style("fill", function (d) {return colors[d.color];})
+      .transition()
+      .attr("cx", function (d) { return x(d.x); })
+      .attr("cy", function (d) { return y(d.y); })
       .on("click", function(d, i) {
         div.transition()
           .duration(200)
@@ -137,28 +147,25 @@ export class OutlierDMChart {
           .style("top", (d3.event.pageY - 28) + "px");
       })
       .on('mouseover', function (d, i) {
-        fade(d.color, .1);
+        that.fade(d.color, .1);
       })
       .on('mouseout', function (d, i) {
-        fadeOut();
+        that.fadeOut(opacity);
+      });
+  }
+
+  fade(color, opacity) {
+    this.svg.selectAll("circle")
+      .filter(function (d) {
+        return d.color != color;
       })
-      .transition()
-      .attr("cx", function (d) { return x(d.x); })
-      .attr("cy", function (d) { return y(d.y); });
+      // .transition()
+      .style("opacity", opacity);
+  }
 
-    function fade(color, opacity) {
-      this.svg.selectAll("circle")
-        .filter(function (d) {
-          return d.color != color;
-        })
-        .transition()
-        .style("opacity", opacity);
-    }
-
-    function fadeOut() {
-      this.svg.selectAll("circle")
-        .transition()
-        .style("opacity", function (d) { opacity(d.size); });
-    }
+  fadeOut(opacity) {
+    this.svg.selectAll("circle")
+      // .transition()
+      .style("opacity", function (d) { opacity(d.size); });
   }
 }
