@@ -15,7 +15,7 @@ export class OutlierDMChart implements OnInit {
   ngOnInit() {
     let height: number = 400 * 1.5;
     let width: number = 500 * 1.5;
-    let margin: number = 100 * 2;
+    let margin: number = 100 * 1.5;
     let labelX: string = 'YEAR';
     let labelY: string = 'MONEY';
     let svg: any = d3.select('.chart')
@@ -88,7 +88,7 @@ export class OutlierDMChart implements OnInit {
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis)
       .append("text")
-      .attr("x", width + 70)
+      .attr("x", width + 100)
       .attr("y", margin - 130)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
@@ -123,20 +123,21 @@ export class OutlierDMChart implements OnInit {
       .attr("opacity", function (d) { return opacity(d.size); })
       .attr("r", function (d) { return scale(d.size); })
       .style("fill", function (d) {return color(d.color);})
-      .on("click", function(d, i) {
+      .on('mouseover', function (d, i) {
+        fade(d.color, .1);
         div.transition()
           .duration(200)
           .style("opacity", .9);
         div.html("<b><p>Year: " + d.x + "</p><p>Money: " + d.y + "</p><p>Budget Phase: " + d.color +
-                 "</p><p>Outlier Score: " + d.size + "</b>")
-          .style("left", (d3.event.pageX) + "px")
+          "</p><p>Outlier Score: " + d.size + "</b>")
+          .style("left", (d3.event.pageX + 20) + "px")
           .style("top", (d3.event.pageY - 28) + "px");
-      })
-      .on('mouseover', function (d, i) {
-        fade(d.color, .1);
       })
       .on('mouseout', function (d, i) {
         fadeOut();
+        div.transition()
+          .duration(200)
+          .style("opacity", 0);
       })
       .transition()
       .attr("cx", function (d) { return x(d.x); })
