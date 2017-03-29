@@ -1,7 +1,7 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "name": "outlier-dm-ionic2",
+  "author": "Jean Piero Hernandez Meze",
+  "homepage": "",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -42,5 +42,5 @@
     "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [],
-  "description": "MyIonic2Project: An Ionic project"
+  "description": "Ionic2 app for the Outlier DM algorithm"
 }
