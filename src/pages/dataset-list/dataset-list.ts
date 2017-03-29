@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {NavController, NavParams, LoadingController, AlertController} from 'ionic-angular';
 import { ItemDetailsPage } from '../dataset-details/dataset-details';
 import { DatasetService } from '../services/dataset-service';
 
@@ -13,7 +13,8 @@ export class DatasetListPage {
   icons: string[];
   items: Array<{title: string, note: string, icon: string}>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public datasetService: DatasetService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public datasetService: DatasetService,
+              public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
     this.selectedItem = navParams.get('item');
 
     let itemSettings = {
@@ -21,35 +22,71 @@ export class DatasetListPage {
       'Ready': {icon: 'checkmark-circle-outline', color: 'secondary'}
     };
 
-    // turn on loading at this point
+    let loading = this.loadingCtrl.create({
+      content: 'Getting files list. Please wait...'
+    });
+
+    loading.present();
+
     this.datasetService.listDatasets().subscribe(
       response => {
+        loading.dismiss();
         this.items = response.map(file => {
           return {
             title: file.filename,
-            note: file.status,
+            status: file.status,
             icon: itemSettings[file.status].icon,
             color: itemSettings[file.status].color
           }
-        })
+        });
       },
       error => {
         console.log(error);
+        let alert = this.alertCtrl.create({
+          title: 'Oops!',
+          subTitle: 'An error has occurred while fetching the files list.',
+          buttons: ['OK']
+        });
+        alert.present();
       },
-      //() => turn off loading here
     );
   }
 
   itemTapped(event, item) {
+    console.log(item);
+    if (item.status == 'Processing') {
+      let alert = this.alertCtrl.create({
+        title: 'Oops!',
+        subTitle: 'This dataset is being processed, try again later',
+        buttons: ['OK']
+      });
+      alert.present();
+      return;
+    }
+
+    let loading = this.loadingCtrl.create({
+      content: 'Downloading dataset. Please wait...'
+    });
+
+    loading.present();
+
     this.datasetService.retrieveDataset(item.title).subscribe(
       res => {
+        loading.dismiss();
         item.data = res;
         this.navCtrl.push(ItemDetailsPage, {
           item: item
         });
       },
       error => {
+        loading.dismiss();
         console.log(error);
+        let alert = this.alertCtrl.create({
+          title: 'Oops!',
+          subTitle: 'An error has occurred while fetching the dataset.',
+          buttons: ['OK']
+        });
+        alert.present();
       }
     );
   }
