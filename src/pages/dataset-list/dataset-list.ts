@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams, LoadingController, AlertController} from 'ionic-angular';
 import { ItemDetailsPage } from '../dataset-details/dataset-details';
-import { DatasetService } from '../services/dataset-service';
+import { DatasetService } from '../../app/services/dataset-service';
 
 @Component({
   selector: 'page-list',
@@ -41,6 +41,7 @@ export class DatasetListPage {
         });
       },
       error => {
+        loading.dismiss();
         console.log(error);
         let alert = this.alertCtrl.create({
           title: 'Oops!',

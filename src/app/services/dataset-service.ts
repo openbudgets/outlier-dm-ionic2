@@ -1,6 +1,6 @@
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
-import {AppSettings} from '../../app/app.settings';
+import {AppSettings} from '../app.settings';
 
 export class DatasetService {
   currentDataset: any;

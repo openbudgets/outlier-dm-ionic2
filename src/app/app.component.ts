@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { DatasetListPage } from '../pages/dataset-list/dataset-list';
+import { NewDatasetPage } from '../pages/new-dataset/new-dataset';
 
 
 @Component({
@@ -28,7 +29,8 @@ export class MyApp {
 
     // set our app's pages
     this.pages = [
-      { title: 'Datasets List', component: DatasetListPage }
+      { title: 'Datasets List', component: DatasetListPage },
+      { title: 'New Dataset', component: NewDatasetPage }
     ];
   }
 
