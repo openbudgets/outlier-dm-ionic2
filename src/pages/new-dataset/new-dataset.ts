@@ -33,10 +33,18 @@ export class NewDatasetPage {
 
     this.damService.startDAMJob(url).subscribe(
       response => {
-        loading.dismiss();
         console.log(response);
 
-        this.datasetService.addDataset(this.datasetName, response.jobid);
+        this.datasetService.addDataset(this.datasetName, response.jobid).subscribe(
+          response => {
+            loading.dismiss();
+            console.log(response);
+          },
+          error => {
+            loading.dismiss();
+            console.log(error);
+          }
+        );
       },
       error => {
         loading.dismiss();
