@@ -20,7 +20,7 @@ export class DatasetService {
   }
 
   addDataset(filename: string, jobid: string) {
-    let url = AppSettings.API_ENDPOINT + '/files/' + filename;
+    let url = AppSettings.API_ENDPOINT + '/files';
     return this.http.post(url, {filename: filename, jobid: jobid}).map(res => res.json());
   }
 }
