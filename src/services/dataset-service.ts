@@ -1,6 +1,6 @@
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
-import {AppSettings} from '../app.settings';
+import {AppSettings} from '../app/app.settings';
 
 export class DatasetService {
   currentDataset: any;
@@ -17,5 +17,10 @@ export class DatasetService {
   retrieveDataset(filename: string) {
     let url = AppSettings.API_ENDPOINT + '/files/' + filename;
     return this.http.get(url).map(res => res.json());
+  }
+
+  addDataset(filename: string, jobid: string) {
+    let url = AppSettings.API_ENDPOINT + '/files/' + filename;
+    return this.http.post(url, {filename: filename, jobid: jobid}).map(res => res.json());
   }
 }
