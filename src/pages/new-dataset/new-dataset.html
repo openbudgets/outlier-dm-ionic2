@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Add New Dataset</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="startDAMJob()">
+    <ion-item>
+      <ion-label>Cube</ion-label>
+      <ion-input type="text" [(ngModel)]="cube" (ngModelChange)="updateFactsUri($event)" name="cube"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>FactsUri</ion-label>
+      <ion-input type="text" [(ngModel)]="factsUri" (ngModelChange)="updateDamUrl($event)" name="factsUri"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>DamUrl</ion-label>
+      <ion-input type="text" [(ngModel)]="damUrl" name="damUrl"></ion-input>
+    </ion-item>
+
+    <button ion-button type="submit" (click)="startDAMJob($event, damUrl)" block>Add Dataset</button>
+  </form>
+</ion-content>
