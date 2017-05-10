@@ -8,15 +8,20 @@
 </ion-header>
 
 <ion-content>
-  <form (ngSubmit)="startDAMJob()">
+  <form>
+    <ion-item>
+      <ion-label>Dataset Name</ion-label>
+      <ion-input type="text" [(ngModel)]="name" name="name"></ion-input>
+    </ion-item>
+
     <ion-item>
       <ion-label>Cube</ion-label>
-      <ion-input type="text" [(ngModel)]="cube" (ngModelChange)="updateFactsUri($event)" name="cube"></ion-input>
+      <ion-input type="text" [(ngModel)]="cube" name="cube"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>FactsUri</ion-label>
-      <ion-input type="text" [(ngModel)]="factsUri" (ngModelChange)="updateDamUrl($event)" name="factsUri"></ion-input>
+      <ion-input type="text" [(ngModel)]="factsUri" name="factsUri"></ion-input>
     </ion-item>
 
     <ion-item>
