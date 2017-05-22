@@ -29,6 +29,28 @@
       <ion-input type="text" [(ngModel)]="damUrl" name="damUrl"></ion-input>
     </ion-item>
 
+    <ion-item>
+      <button ion-button (click)="isSearching=true;">Search dataset by name</button>
+    </ion-item>
+
+    <div [hidden]="!isSearching">
+      <ion-item>
+        <ion-searchbar [(ngModel)]="searchBar"
+                       (input)="filterPackageList($event)"
+                       placeholder="Start typing..."
+                       name="dataset-name">
+        </ion-searchbar>
+      </ion-item>
+
+      <ion-list [hidden]="!isSearching">
+        <button ion-item
+                *ngFor="let dataset of packageList"
+                (click)="selectDatasetFromSearchList(dataset)">
+          {{ dataset.name }}
+        </button>
+      </ion-list>
+    </div>
+
     <button ion-button type="submit" (click)="startDAMJob($event, damUrl)" block>Add Dataset</button>
   </form>
 </ion-content>
