@@ -25,7 +25,7 @@ export class NewDatasetPage {
     this.datasetName = "My New Dataset";
     this.cube = 'aragon-2008-income__568a8';
     this.factsUri = 'BABBAGE_FACT_URI=http://ws307.math.auth.gr/rudolf/public/api/3/cubes/';
-    this.damUrl = 'http://dam-obeu.iais.fraunhofer.de/outlier_detection/LOF/sample?';
+    this.damUrl = 'http://dam-obeu.iais.fraunhofer.de/outlier_detection/LOF?';
 
     let loading = this.loadingCtrl.create({
       content: 'Requesting dataset list.'

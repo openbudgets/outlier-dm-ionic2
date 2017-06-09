@@ -30,7 +30,7 @@
     </ion-item>
 
     <ion-item>
-      <button ion-button (click)="isSearching=true;">Search dataset by name</button>
+      <button ion-button (click)="isSearching=!isSearching;">Search dataset by name</button>
     </ion-item>
 
     <div [hidden]="!isSearching">
