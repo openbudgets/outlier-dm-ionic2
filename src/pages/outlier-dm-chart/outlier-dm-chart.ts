@@ -26,6 +26,8 @@ export class OutlierDMChart implements OnInit {
       .append("g")
       .attr("transform", "translate(" + margin + "," + margin + ")");
 
+    console.log(this.data);
+
     let x_data = this.data.map(function (d) { return d.x; });
     let years = x_data.filter(function(item, pos) {
       return x_data.indexOf(item) == pos;
