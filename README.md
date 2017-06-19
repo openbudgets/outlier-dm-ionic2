@@ -22,3 +22,7 @@ ionic start myApp tabs
 # start the server
 ionic serve
 ```
+Navigate to [http://localhost:8100/](http://localhost:8100/) in your browser. 
+This is the Frontend.
+
+Backend will need outlier_dm/webappf
