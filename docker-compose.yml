@@ -1,0 +1,9 @@
+version: '2'
+services:
+  app:
+    build: .
+    command: ping 127.0.0.1
+    ports:
+      - "8100:8100"
+    volumes:
+      - .:/usr/src/app
