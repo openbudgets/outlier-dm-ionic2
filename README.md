@@ -1,6 +1,6 @@
 Visualization tool for the Outlier Detection algorithm developed for the OpenBudegets project.
 
-# Guide
+# User Guide
 ## Datasets List
 In this module the user can see the list of datasets that have been already processed by the tool and which results are 
 stored locally. Clicking on an item of that list will render the details page for that dataset.
@@ -27,7 +27,7 @@ By clicking on the "New Dataset" button in the left navigation bar users are red
  saving the results locally so other users or themselves can come later on an just visualize the results without 
  computing everything again.
   
-#####Field descriptions:
+####Field descriptions:
 * Dataset Name: name that will be shown in the datasets list page to refer to this dataset once it is added.
 * Cube: dataset ID inside OpenSpending.
 * FactsURI: Babbage API endpoint to be used.
@@ -35,7 +35,7 @@ By clicking on the "New Dataset" button in the left navigation bar users are red
 
 ![New Dataset](resources/screenshots/new-dataset.png?raw=true "New Dataset")
 
-#####Searching for a Dataset
+####Searching for a Dataset
 * Clicking the "SEARCH DATASET BY NAME" button will open a search bar in which you can start typing part of the
 name of your dataset in the OpenSpending platform, the list will filter out all datasets not matching your search.
 * After filtering, clicking on an element from that list will automatically paste the ID of that dataset into the "Cube"
@@ -44,7 +44,9 @@ field and close the search component.
  
 ![New Dataset Search](resources/screenshots/new-dataset-search.png?raw=true "New Dataset Search") 
 
-# Start inside Docker container
+# Installation
+
+### Start inside Docker container
 * Install docker and docker-compose in your machine.
 * Run the backend app inside the webapp folder of this repository: (https://github.com/openbudgets/outlier_dm).
 * Then:  ```$ docker-compose up```
@@ -77,6 +79,3 @@ ionic start myApp tabs
 ionic serve
 ```
 Navigate to [http://localhost:8100/](http://localhost:8100/) in your browser. 
-This is the Frontend.
-
-Backend will need outlier_dm/webapp
