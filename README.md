@@ -11,7 +11,7 @@ stored locally. Clicking on an item of that list will render the details page fo
 Shows a bubble chart for the selected dataset. Each bubble is a transaction in the dataset as returned by the 
 Outlier DM algorithm.
 
-###Dimensions
+**Dimensions**
 * X: Year.
 * Y: Amount of money as it comes from the dataset itself.
 * Size of the bubble: score obtained by this transaction telling us how "outlier" it is.
@@ -27,7 +27,7 @@ By clicking on the "New Dataset" button in the left navigation bar users are red
  saving the results locally so other users or themselves can come later on an just visualize the results without 
  computing everything again.
   
-###Field descriptions
+**Field descriptions**
 * Dataset Name: name that will be shown in the datasets list page to refer to this dataset once it is added.
 * Cube: dataset ID inside OpenSpending.
 * FactsURI: Babbage API endpoint to be used.
