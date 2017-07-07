@@ -1,5 +1,8 @@
 Visualization tool for the Outlier Detection algorithm developed for the OpenBudegets project.
 
+![Datasets List](resources/screenshots/datasets-list.png?raw=true "Datasets List")
+
+
 # Start inside Docker container
 * Run the backend app (https://github.com/openbudgets/outlier_dm)
 * install docker and docker-compose in your machine
