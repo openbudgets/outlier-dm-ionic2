@@ -6,16 +6,20 @@ In this module the user can see the list of datasets that have been already proc
 stored locally. Clicking on an item of that list will render the details page for that dataset.
  
 ![Datasets List](resources/screenshots/datasets-list.png?raw=true "Datasets List")
+![Dataset Status](resources/screenshots/datasets-list-status.png?raw=true "Dataset Status")
+
+Each Dataset can be in two different statuses: Ready (green) and Processing (red), as shown in this picture:
+
 
 ## Dataset Detail
 Shows a bubble chart for the selected dataset. Each bubble is a transaction in the dataset as returned by the 
 Outlier DM algorithm.
 
 **Dimensions**
-* X: Year.
-* Y: Amount of money as it comes from the dataset itself.
-* Size of the bubble: score obtained by this transaction telling us how "outlier" it is.
-* Color of the bubble: budget phase or status in which this particular transaction appears in.
+* **X**: Year.
+* **Y**: Amount of money as it comes from the dataset itself.
+* **Size of the bubble**: score obtained by this transaction telling us how "outlier" it is.
+* **Color of the bubble**: budget phase or status in which this particular transaction appears in.
 
 Hovering your mouse over a bubble will open a popup dialog with the exact information related to that transaction. 
 
@@ -28,14 +32,14 @@ By clicking on the "New Dataset" button in the left navigation bar users are red
  computing everything again.
   
 **Field descriptions**
-* Dataset Name: name that will be shown in the datasets list page to refer to this dataset once it is added.
-* Cube: dataset ID inside OpenSpending.
-* FactsURI: Babbage API endpoint to be used.
-* DamUrl: DAM endpoint used for executing the algorithm over the dataset.
+* **Dataset Name**: name that will be shown in the datasets list page to refer to this dataset once it is added.
+* **Cube**: dataset ID inside OpenSpending.
+* **FactsURI**: Babbage API endpoint to be used.
+* **DamUrl**: DAM endpoint used for executing the algorithm over the dataset.
 
 ![New Dataset](resources/screenshots/new-dataset.png?raw=true "New Dataset")
 
-##Searching for a Dataset
+**Searching for a Dataset**
 * Clicking the "SEARCH DATASET BY NAME" button will open a search bar in which you can start typing part of the
 name of your dataset in the OpenSpending platform, the list will filter out all datasets not matching your search.
 * After filtering, clicking on an element from that list will automatically paste the ID of that dataset into the "Cube"
@@ -60,22 +64,16 @@ docker-compose --build
 # clone the repo
 git clone https://github.com/openbudgets/outlier-dm-ionic2.git
 
-
 # change directory to repo
 cd outlier-dm-ionic2
 
-# Use npm or yarn to install the dependencies:
+# Use npm to install the dependencies
 npm install
 
 #install ionic2
 npm install -g cordova ionic
 
-#start app
-ionic start myApp tabs
-
-#will have some settings, basiclly all choose 'y'
-
 # start the server
-ionic serve
+ionic serve --all
 ```
 Navigate to [http://localhost:8100/](http://localhost:8100/) in your browser. 
