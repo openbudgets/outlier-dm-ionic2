@@ -6,9 +6,9 @@ In this module the user can see the list of datasets that have been already proc
 stored locally. Clicking on an item of that list will render the details page for that dataset.
  
 ![Datasets List](resources/screenshots/datasets-list.png?raw=true "Datasets List")
-![Dataset Status](resources/screenshots/datasets-list-status.png?raw=true "Dataset Status")
 
 Each Dataset can be in two different statuses: Ready (green) and Processing (red), as shown in this picture:
+![Dataset Status](resources/screenshots/datasets-list-status.png?raw=true "Dataset Status")
 
 
 ## Dataset Detail
