@@ -131,7 +131,7 @@ export class OutlierDMChart implements OnInit {
           .duration(200)
           .style("opacity", .9);
         div.html("<b><p>Year: " + d.x + "</p><p>Money: " + d.y + "</p><p>Budget Phase: " + d.color +
-          "</p><p>Outlier Score: " + d.size + "</b>")
+          "</p><p>Outlier Score: " + d.score_label + "</b>")
           .style("left", (d3.event.pageX + 20) + "px")
           .style("top", (d3.event.pageY - 28) + "px");
       })
