@@ -72,7 +72,7 @@ export class DatasetListPage {
     });
 
     this.navCtrl.push(ItemDetailsPage, {
-      item: {title: "Comparison", data: data}
+      item: {title: "Comparison of selected Datasets", data: data}
     });
   }
 
