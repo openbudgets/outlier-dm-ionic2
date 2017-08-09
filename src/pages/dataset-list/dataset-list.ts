@@ -10,15 +10,15 @@ import { DatasetService } from '../../services/dataset-service';
 })
 export class DatasetListPage {
   selectedItem: any;
-  items: Array<{title: string, note: string, icon: string, selected: any}>;
+  items: Array<{title: string, data: any, note: string, icon: string, selected: any}>;
   isComparingMultiple: boolean;
-  comparisonData: any;
+  selectedDatasets: Array<string>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public datasetService: DatasetService,
               public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
     this.selectedItem = navParams.get('item');
     this.isComparingMultiple = false;
-    this.comparisonData = [];
+    this.selectedDatasets = [];
 
     let itemSettings = {
       'Processing': {icon: 'timer', color: 'danger'},
@@ -58,8 +58,21 @@ export class DatasetListPage {
   }
 
   compareDatasets(event) {
+    // take the data of datasets that are selected for comparison
+    let that = this;
+    let data = this.items
+      .filter(function (item) {
+        return that.selectedDatasets.includes(item.title);
+    })
+      .map(function (item) {
+        return item.data;
+    })
+      .reduce(function(a, b) {
+        return a.concat(b);
+    });
+
     this.navCtrl.push(ItemDetailsPage, {
-      item: {title: "Comparison", data: this.comparisonData}
+      item: {title: "Comparison", data: data}
     });
   }
 
@@ -84,15 +97,20 @@ export class DatasetListPage {
     this.datasetService.retrieveDataset(item.title).subscribe(
       res => {
         loading.dismiss();
+        item.data = res;
 
         if (this.isComparingMultiple) {
           if (!item.selected) {
-            this.comparisonData = this.comparisonData.concat(res);
+            this.selectedDatasets.push(item.title);
+          }
+          else {
+            let toRemove = this.selectedDatasets.indexOf(item.title);
+            this.selectedDatasets.splice(toRemove, 1);
           }
           item.selected = !item.selected;
+          console.log(this.selectedDatasets);
         }
         else {
-          item.data = res;
           this.navCtrl.push(ItemDetailsPage, {
             item: item
           });
