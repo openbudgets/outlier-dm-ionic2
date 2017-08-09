@@ -30,7 +30,7 @@
     </ion-item>
 
     <ion-item>
-      <button ion-button (click)="isSearching=!isSearching;">Search dataset by name</button>
+      <button color="obeu-green" ion-button (click)="isSearching=!isSearching;">Search dataset by name</button>
     </ion-item>
 
     <div [hidden]="!isSearching">
@@ -51,6 +51,6 @@
       </ion-list>
     </div>
 
-    <button ion-button type="submit" (click)="startDAMJob($event, damUrl)" block>Add Dataset</button>
+    <button color="obeu-green" ion-button type="submit" (click)="startDAMJob($event, damUrl)" block>Add Dataset</button>
   </form>
 </ion-content>
