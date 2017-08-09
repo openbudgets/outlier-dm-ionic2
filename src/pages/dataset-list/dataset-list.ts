@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams, LoadingController, AlertController} from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { ItemDetailsPage } from '../dataset-details/dataset-details';
 import { DatasetService } from '../../services/dataset-service';
 
@@ -10,12 +10,15 @@ import { DatasetService } from '../../services/dataset-service';
 })
 export class DatasetListPage {
   selectedItem: any;
-  icons: string[];
-  items: Array<{title: string, note: string, icon: string}>;
+  items: Array<{title: string, note: string, icon: string, selected: any}>;
+  isComparingMultiple: boolean;
+  comparisonData: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public datasetService: DatasetService,
               public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
     this.selectedItem = navParams.get('item');
+    this.isComparingMultiple = false;
+    this.comparisonData = [];
 
     let itemSettings = {
       'Processing': {icon: 'timer', color: 'danger'},
@@ -36,7 +39,8 @@ export class DatasetListPage {
             title: file.filename,
             status: file.status,
             icon: itemSettings[file.status].icon,
-            color: itemSettings[file.status].color
+            color: itemSettings[file.status].color,
+            selected: false
           }
         });
       },
@@ -51,6 +55,12 @@ export class DatasetListPage {
         alert.present();
       },
     );
+  }
+
+  compareDatasets(event) {
+    this.navCtrl.push(ItemDetailsPage, {
+      item: {title: "Comparison", data: this.comparisonData}
+    });
   }
 
   itemTapped(event, item) {
@@ -74,10 +84,19 @@ export class DatasetListPage {
     this.datasetService.retrieveDataset(item.title).subscribe(
       res => {
         loading.dismiss();
-        item.data = res;
-        this.navCtrl.push(ItemDetailsPage, {
-          item: item
-        });
+
+        if (this.isComparingMultiple) {
+          if (!item.selected) {
+            this.comparisonData = this.comparisonData.concat(res);
+          }
+          item.selected = !item.selected;
+        }
+        else {
+          item.data = res;
+          this.navCtrl.push(ItemDetailsPage, {
+            item: item
+          });
+        }
       },
       error => {
         loading.dismiss();

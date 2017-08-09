@@ -4,13 +4,21 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Datasets List</ion-title>
+    <ion-buttons start>
+      <button (click)="isComparingMultiple = !isComparingMultiple" ion-button>Compare Multiple</button>
+      <ion-toggle [checked]="isComparingMultiple" (click)="isComparingMultiple = !isComparingMultiple"></ion-toggle>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button (click)="compareDatasets($event)">Go</button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" [color]="item.color" item-left></ion-icon>
+    <button ion-item
+            *ngFor="let item of items" (click)="itemTapped($event, item)">
+      <ion-icon [name]="(item.selected) ? 'md-checkmark-circle' : item.icon" [color]="item.color" item-left></ion-icon>
       {{item.title}}
       <div class="item-note" item-right>
         <ion-badge [color]="item.color"> {{item.status}} </ion-badge>
