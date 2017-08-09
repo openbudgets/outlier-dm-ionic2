@@ -32,6 +32,7 @@ export class OutlierDMChart implements OnInit {
     let years = x_data.filter(function(item, pos) {
       return x_data.indexOf(item) == pos;
     }).sort();
+    years.splice(0, 0, 0); // add year 0 for rendering purposes
 
     let range_array = new Array(years.length);
     range_array[0] = 0;
