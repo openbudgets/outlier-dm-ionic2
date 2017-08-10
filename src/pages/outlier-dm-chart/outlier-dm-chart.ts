@@ -124,7 +124,7 @@ export class OutlierDMChart implements OnInit {
       .attr("cx", width / 2)
       .attr("cy", height / 2)
       .attr("opacity", function (d) { return opacity(d.size); })
-      .attr("r", function (d) { return scale(d.size); })
+      .attr("r", function (d) { return scale(d.size*3); })
       .style("fill", function (d) {return color(d.color);})
       .on('mouseover', function (d, i) {
         fade(d.color, .1);
