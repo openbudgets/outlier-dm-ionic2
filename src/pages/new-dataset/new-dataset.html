@@ -19,14 +19,18 @@
       <ion-input type="text" [(ngModel)]="cube" name="cube"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item [hidden]="!showAdvancedConfig">
       <ion-label>FactsUri</ion-label>
       <ion-input type="text" [(ngModel)]="factsUri" name="factsUri"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item [hidden]="!showAdvancedConfig">
       <ion-label>DamUrl</ion-label>
       <ion-input type="text" [(ngModel)]="damUrl" name="damUrl"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <button color="obeu-green" ion-button (click)="showAdvancedConfig=!showAdvancedConfig;">Advanced Configuration</button>
     </ion-item>
 
     <ion-item>

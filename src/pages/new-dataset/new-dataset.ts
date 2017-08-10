@@ -18,6 +18,7 @@ export class NewDatasetPage {
   packageList: any;
   searchBar: string = '';
   isSearching: boolean = false;
+  showAdvancedConfig: boolean = false;
 
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
               public damService: DAMService, public datasetService: DatasetService,
