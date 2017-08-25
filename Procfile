@@ -1,2 +1,2 @@
-api: gunicorn backend/app:backend/app --log-file -
+api: gunicorn backend/app:app --log-file -
 web: node server.js
