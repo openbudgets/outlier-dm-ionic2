@@ -1,2 +1,2 @@
-api: gunicorn --pythonpath backend app.py --log-file -
+api: gunicorn backend --log-file -
 web: node server.js
