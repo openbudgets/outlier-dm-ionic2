@@ -3,13 +3,18 @@ Visualization tool for the Outlier Detection algorithm developed for the OpenBud
 # User Guide
 ## Datasets List
 In this module the user can see the list of datasets that have been already processed by the tool and which results are 
-stored locally. Clicking on an item of that list will render the details page for that dataset.
- 
+stored locally. 
+
+Clicking on an item of that list will render the details page for that dataset.
 ![Datasets List](resources/screenshots/datasets-list.png?raw=true "Datasets List")
+
+By activating the **COMPARE MULTIPLE** functionality, users can select various datasets and then click **GO** to open
+them all at the same time in a single chart for easy comparison. Selected datasets get a filled circled check mark as 
+shown in the next image: 
+![Datasets List Comparison](resources/screenshots/datasets-list-comparison.png?raw=true "Datasets List Comparison")
 
 Each Dataset can be in two different statuses: Ready (green) and Processing (red), as shown in this picture:
 ![Dataset Status](resources/screenshots/datasets-list-status.png?raw=true "Dataset Status")
-
 
 ## Dataset Detail
 Shows a bubble chart for the selected dataset. Each bubble is a transaction in the dataset as returned by the 
@@ -26,7 +31,7 @@ Hovering your mouse over a bubble will open a popup dialog with the exact inform
 ![Dataset Detail](resources/screenshots/dataset-detail.png?raw=true "Dataset Detail")
 
 ## Adding a new Dataset
-By clicking on the "New Dataset" button in the left navigation bar users are redirected to this view where they can tell
+By clicking on the **New Dataset** button in the left navigation bar users are redirected to this view where they can tell
  the tool to import new datasets from OpenSpending, processing them through DAM using the outlier_dm algorithm and 
  saving the results locally so other users or themselves can come later on an just visualize the results without 
  computing everything again.
@@ -40,13 +45,14 @@ By clicking on the "New Dataset" button in the left navigation bar users are red
 ![New Dataset](resources/screenshots/new-dataset.png?raw=true "New Dataset")
 
 **Searching for a Dataset**
-* Clicking the "SEARCH DATASET BY NAME" button will open a search bar in which you can start typing part of the
+* Clicking the **SEARCH DATASET BY NAME** button will open a search bar in which you can start typing part of the
 name of your dataset in the OpenSpending platform, the list will filter out all datasets not matching your search.
 * After filtering, clicking on an element from that list will automatically paste the ID of that dataset into the "Cube"
 field and close the search component.
-* After filling all the fields as you see fit, click the "ADD DATASET" button
+* After filling all the fields as you see fit, click the **ADD DATASET** button
  
 ![New Dataset Search](resources/screenshots/new-dataset-search.png?raw=true "New Dataset Search") 
+
 
 # Installation
 
@@ -61,19 +67,14 @@ docker-compose --build
 
 ## Installing locally
 ```bash
-# clone the repo
-git clone https://github.com/openbudgets/outlier-dm-ionic2.git
+# install backend dependencies and start backend server on a terminal (python 3)
+cd backend
+sudo pip3 install -f requirements.txt
+python3 app.py
 
-# change directory to repo
-cd outlier-dm-ionic2
-
-# Use npm to install the dependencies
+# install frontend dependencies and run web app
 npm install
-
-#install ionic2
 npm install -g cordova ionic
-
-# start the server
 ionic serve --all
 ```
 Navigate to [http://localhost:8100/](http://localhost:8100/) in your browser. 
