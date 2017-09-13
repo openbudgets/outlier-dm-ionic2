@@ -8,11 +8,11 @@ export class BabbageService {
   static get parameters() { return [[Http]]; }
 
   constructor(private http:Http) {
-    this.babbageUrl = 'http://ws307.math.auth.gr/rudolf/public/search/package?q=';
+    this.babbageUrl = 'http://apps.openbudgets.eu/search/package?q=';
   }
 
   searchPackage(query) {
-    return this.http.get(this.babbageUrl + query).map(res => res.json());
+    return this.http.get(this.babbageUrl + query + '&no-cache-token=' + Math.random()).map(res => res.json());
   }
 
   loadItems() {
