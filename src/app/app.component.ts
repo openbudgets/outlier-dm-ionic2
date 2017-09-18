@@ -8,7 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { DatasetListPage } from '../pages/dataset-list/dataset-list';
 import { NewDatasetPage } from '../pages/new-dataset/new-dataset';
 import { ConfigurationPage } from "../pages/configuration/configuration";
-import {LangService} from "../services/lang-service";
+import { LangService } from "../services/lang-service";
 
 
 @Component({

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {LangService} from "../../services/lang-service";
+import { LangService } from "../../services/lang-service";
 
 @Pipe({
   name: 'translate',
@@ -35,6 +35,10 @@ export class TranslatePipe implements PipeTransform {
       'Add New Dataset': {
         'en': 'Add New Dataset',
         'de': 'Neuen Datensatz hinzufugen'
+      },
+      'New Dataset': {
+        'en': 'New Dataset',
+        'de': 'Neuer Datensatz'
       },
       'Dataset Name': {
         'en': 'Dataset Name',
