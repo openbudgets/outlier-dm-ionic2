@@ -3,38 +3,38 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Add New Dataset</ion-title>
+    <ion-title> {{ 'Add New Dataset' | translate }} </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <form>
     <ion-item>
-      <ion-label>Dataset Name</ion-label>
+      <ion-label> {{ 'Dataset Name' | translate }} </ion-label>
       <ion-input type="text" [(ngModel)]="datasetName" name="name"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label>Cube</ion-label>
+      <ion-label> {{ 'Dataset ID' | translate }} </ion-label>
       <ion-input type="text" [(ngModel)]="cube" name="cube"></ion-input>
     </ion-item>
 
     <ion-item [hidden]="!showAdvancedConfig">
-      <ion-label>FactsUri</ion-label>
+      <ion-label> {{ 'FactsUri' | translate }} </ion-label>
       <ion-input type="text" [(ngModel)]="factsUri" name="factsUri"></ion-input>
     </ion-item>
 
     <ion-item [hidden]="!showAdvancedConfig">
-      <ion-label>DamUrl</ion-label>
+      <ion-label> {{ 'DamUrl' | translate }} </ion-label>
       <ion-input type="text" [(ngModel)]="damUrl" name="damUrl"></ion-input>
     </ion-item>
 
     <ion-item>
-      <button color="obeu-green" ion-button (click)="showAdvancedConfig=!showAdvancedConfig;">Advanced Configuration</button>
+      <button color="obeu-green" ion-button (click)="showAdvancedConfig=!showAdvancedConfig;" > {{ 'Advanced Configuration' | translate }} </button>
     </ion-item>
 
     <ion-item>
-      <button color="obeu-green" ion-button (click)="isSearching=!isSearching;">Search dataset by name</button>
+      <button color="obeu-green" ion-button (click)="isSearching=!isSearching;"> {{ 'Search dataset by name' | translate }} </button>
     </ion-item>
 
     <div [hidden]="!isSearching">
@@ -55,6 +55,6 @@
       </ion-list>
     </div>
 
-    <button color="obeu-green" ion-button type="submit" (click)="startDAMJob($event, damUrl)" block>Add Dataset</button>
+    <button color="obeu-green" ion-button type="submit" (click)="startDAMJob($event, damUrl)" block> {{ 'Add Dataset' | translate }} </button>
   </form>
 </ion-content>

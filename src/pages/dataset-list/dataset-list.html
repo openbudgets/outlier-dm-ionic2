@@ -3,13 +3,13 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Datasets List</ion-title>
+    <ion-title> {{ 'Datasets List' | translate }} </ion-title>
     <ion-buttons start>
-      <button (click)="isComparingMultiple = !isComparingMultiple" ion-button>Compare Multiple</button>
+      <button (click)="isComparingMultiple = !isComparingMultiple" ion-button> {{ 'Compare Multiple' | translate }} </button>
       <ion-toggle [checked]="isComparingMultiple" (click)="isComparingMultiple = !isComparingMultiple"></ion-toggle>
     </ion-buttons>
     <ion-buttons end>
-      <button ion-button (click)="compareDatasets($event)">Go</button>
+      <button ion-button (click)="compareDatasets($event)"> {{ 'Go' | translate }} </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
