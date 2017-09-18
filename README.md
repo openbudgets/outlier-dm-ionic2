@@ -78,3 +78,18 @@ npm install -g cordova ionic
 ionic serve --all
 ```
 Navigate to [http://localhost:8100/](http://localhost:8100/) in your browser. 
+
+## Adding new languages for translation
+- Open the ```src/app/pipes/translate.ts``` file and add the string translation for your new language in the shown 
+format. For example, to add translations for French, one would extend every record in the translations dictionary. 
+Each one of these records look like this:
+```
+'Dataset Details': {
+  'en': 'Dataset Details',
+  'de': 'Datensatzdetails',
+  'fr': 'SomeTranslationInFrench
+}
+```
+Where 'Dataset Details' is the original string and the others are translations to each respective language
+- Then, open ```src/app/pages/configuration/configuration.ts``` and add your language label and value to the 
+```languages``` list, which is the one responsible for the ***SELECT*** element in the configuration page.
