@@ -25,7 +25,7 @@ export class NewDatasetPage {
               public babbageService: BabbageService) {
     this.datasetName = "My New Dataset";
     this.cube = 'aragon-2008-income__568a8';
-    this.factsUri = 'BABBAGE_FACT_URI=http://ws307.math.auth.gr/rudolf/public/api/3/cubes/';
+    this.factsUri = 'BABBAGE_FACT_URI=http://apps.openbudgets.eu/api/3/cubes/';
     this.damUrl = 'https://apps.openbudgets.eu/dam/outlier_detection/LOF?';
 
     let loading = this.loadingCtrl.create({
