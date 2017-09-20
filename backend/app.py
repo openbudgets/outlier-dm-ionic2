@@ -99,7 +99,7 @@ def query_dam(file):
     print("Querying DAM for jobid {}".format(jobid))
 
     response = requests.get(
-        'http://dam-obeu.iais.fraunhofer.de/results/{}'.format(jobid))
+        'https://apps.openbudgets.eu/dam/results/{}'.format(jobid))
 
     if response.status_code != 200:
         print('Bad response code: {}'.format(response.status_code))
