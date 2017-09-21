@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ModalController} from "ionic-angular";
+import {RelatedInfoModal} from "../related-info-modal/related-info-modal";
 
 // include d3 as it comes from the standard d3 js file
 declare var d3: any;
@@ -10,9 +12,10 @@ declare var d3: any;
 export class OutlierDMChart implements OnInit {
   @Input() data: any;
 
-  constructor() {}
+  constructor(public modalCtrl: ModalController) {}
 
   ngOnInit() {
+    let outlierDMChartInstance = this;
     let height: number = 400 * 1.5;
     let width: number = 500 * 1.5;
     let margin: number = 100 * 1.5;
@@ -141,6 +144,18 @@ export class OutlierDMChart implements OnInit {
         div.transition()
           .duration(200)
           .style("opacity", 0);
+      })
+      .on('click', function (d, i) {
+
+        let replacerFunction = function (key, value) {
+          if (key == 'x' || key == 'y' || key == 'color' || key == 'size' || key == 'Item') return undefined;
+          return value;
+        };
+
+        let relatedInfoModal = outlierDMChartInstance
+          .modalCtrl.create(RelatedInfoModal,
+            {'modalString': JSON.stringify(d, replacerFunction, 4)});
+        relatedInfoModal.present();
       })
       .transition()
       .attr("cx", function (d) { return x(d.x); })

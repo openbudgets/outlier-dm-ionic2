@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
-import { ItemDetailsPage } from '../dataset-details/dataset-details';
+import { DatasetDetailsPage } from '../dataset-details/dataset-details';
 import { DatasetService } from '../../services/dataset-service';
 export var DatasetListPage = (function () {
     function DatasetListPage(navCtrl, navParams, datasetService, loadingCtrl, alertCtrl) {
@@ -56,7 +56,7 @@ export var DatasetListPage = (function () {
             .reduce(function (a, b) {
             return a.concat(b);
         });
-        this.navCtrl.push(ItemDetailsPage, {
+        this.navCtrl.push(DatasetDetailsPage, {
             item: { title: "Comparison of selected Datasets", data: data }
         });
     };
@@ -91,7 +91,7 @@ export var DatasetListPage = (function () {
                 console.log(_this.selectedDatasets);
             }
             else {
-                _this.navCtrl.push(ItemDetailsPage, {
+                _this.navCtrl.push(DatasetDetailsPage, {
                     item: item
                 });
             }

@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">{{ 'Close' | translate }}</button>
+    </ion-buttons>
+    <ion-title>{{ 'Related Information' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div [hidden]="!modalString">
+    <pre style="background-color: #f8f8f8">
+      {{modalString}}
+    </pre>
+  </div>
+
+  <div [hidden]="modalString">
+    <p>No parameters passed.</p>
+  </div>
+  <button ion-button color="danger" full (click)="dismiss()">{{ 'Close' | translate }}</button>
+
+</ion-content>

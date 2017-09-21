@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-
 import { NavController, NavParams } from 'ionic-angular';
-
 import { DatasetService } from '../../services/dataset-service'
 
 
@@ -10,7 +8,7 @@ import { DatasetService } from '../../services/dataset-service'
   templateUrl: 'dataset-details.html',
   providers: [DatasetService]
 })
-export class ItemDetailsPage {
+export class DatasetDetailsPage {
   dataset: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private datasetService: DatasetService) {

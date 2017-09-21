@@ -75,6 +75,14 @@ export class TranslatePipe implements PipeTransform {
       'Language': {
         'en': 'Language',
         'de': 'Sprache'
+      },
+      'Related Information': {
+        'en': 'Related Information',
+        'de': 'Verwandte Informationen'
+      },
+      'Close': {
+        'en': 'Close',
+        'de': 'schließen'
       }
     };
 
