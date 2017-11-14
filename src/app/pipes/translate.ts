@@ -62,7 +62,7 @@ export class TranslatePipe implements PipeTransform {
       },
       'Search dataset by name': {
         'en': 'Search dataset by name',
-        'de': 'Suche mit Name'
+        'de': 'Namenssuche'
       },
       'Add Dataset': {
         'en': 'Add Dataset',
